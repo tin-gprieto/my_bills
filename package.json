@@ -1,0 +1,11 @@
+{
+  "name": "my_bills",
+  "version": "1.0.0",
+  "description": "Program for manage your personals bills",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "tin-gprieto",
+  "license": "ISC"
+}
