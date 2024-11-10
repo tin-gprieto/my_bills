@@ -12,14 +12,12 @@ function get_id(obj: { [id: number]: unknown }) {
 export class User {
   id: number;
   name: string;
-  cash_balance: number;
   accounts: { [id: number]: Account };
   consuptions: { [id: number]: Consumption };
 
-  constructor(id: number, name: string, cash_amount: number) {
+  constructor(id: number, name: string) {
     this.id = id;
     this.name = name;
-    this.cash_balance = cash_amount;
     this.accounts = {};
     this.consuptions = [];
   }
@@ -33,6 +31,11 @@ export class User {
     const id = get_id(this.accounts);
     const account = new Account(balance, bank, type, currency);
     this.accounts[id] = account;
+    return id;
+  }
+
+  getAccountBalance(id: number) {
+    return this.accounts[id].balance;
   }
 
   addConsumption(
@@ -56,12 +59,8 @@ export class User {
     return id;
   }
 
-  payConsumption(id: number, account_id?: number) {
-    if (account_id) {
-        this.accounts[account_id].balance = this.consuptions[id].pay(this.accounts[account_id].balance);
-    } else {
-        this.cash_balance = this.consuptions[id].pay(this.cash_balance);
-    }
+  payConsumption(id: number) {
+    
   }
 
 }

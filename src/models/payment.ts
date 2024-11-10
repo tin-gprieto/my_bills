@@ -1,18 +1,33 @@
 import { Currency } from "./currency";
 
-export enum PaymentMethod {
+export enum PaymentMethodType {
   CreditCard,
   DebitCard,
   Cash,
+}
+
+class PaymentInstallments {
+  paid: number;
+  total: number;
+}
+
+class PaymentMethod {
+  type: PaymentMethodType;
+  account_id?: number;
+  installments: PaymentInstallments;
+
+  constructor(type: PaymentMethodType, installments?: number) {
+    this.type = type;
+    this.installments.paid = 0;
+    this.installments.total = installments ? installments : 1;
+  }
 }
 
 export class Payment {
   date?: Date;
   amount: number;
   currency: Currency;
-  method?: PaymentMethod;
-  paidInstallments?: number;
-  totalInstallments?: number;
+  method: PaymentMethod;
   paid: boolean;
 
   constructor(

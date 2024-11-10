@@ -1,6 +1,7 @@
 import { Currency } from "./currency";
 
 export enum AccountType {
+  Cash,
   Savings,
   Investment,
   Credit,
@@ -9,7 +10,7 @@ export enum AccountType {
 export class Account {
   balance: number;
   currency?: Currency;
-  bank: string;
+  bank?: string;
   type: AccountType;
 
   constructor(
@@ -19,8 +20,8 @@ export class Account {
     currency?: Currency,
   ) {
     this.balance = balance;
-    if (currency == undefined && type == AccountType.Savings) {
-      throw new Error('Currency must be defined for savings accounts');
+    if (currency == undefined && (type == AccountType.Savings || type == AccountType.Cash)) {
+      throw new Error('Currency must be defined for savings or cash accounts');
     }
     this.currency = currency;
     this.bank = bank;
